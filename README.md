@@ -6,7 +6,7 @@ import { jsonapi } from 'beedi';
 
 async function handler(event, { dep1 }) {
 
-  // The handler just contains your business logic
+  // The handler just contains the logic
 
   await dep1(event.body.id);
   return {
