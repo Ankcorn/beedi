@@ -1,5 +1,6 @@
-# Beedi
-Make Api's using aws lambda and DI
+# BeeDI / 🐝 DI
+
+BeeDI is a opinionated and lightweight library for building lambdas to help you build tidy and testable lambda functions.
 
 ```js
 import { jsonapi } from 'beedi';
