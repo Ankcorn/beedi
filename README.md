@@ -20,7 +20,7 @@ export const main = jsonapi({
  errors: {
    '*': (e) => ({
      statusCode: 500,
-    message: 'it broke'
+     body: { message: 'it broke' }
   }),
   dependencies: () => ({ dep1: () => /* some 3rd party dep*/})
  }
