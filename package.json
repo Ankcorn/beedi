@@ -1,0 +1,23 @@
+{
+  "name": "beedi",
+  "version": "0.0.0",
+  "description": "Make Api's using aws lambda and DI",
+  "main": "index.js",
+  "scripts": {
+    "test": "uvu -r esm tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ankcorn/beedi.git"
+  },
+  "author": "Thomas Ankcorn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ankcorn/beedi/issues"
+  },
+  "homepage": "https://github.com/Ankcorn/beedi#readme",
+  "devDependencies": {
+    "esm": "^3.2.25",
+    "uvu": "^0.3.4"
+  }
+}
