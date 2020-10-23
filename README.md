@@ -1,4 +1,4 @@
-# beedi
+# Beedi
 Make Api's using aws lambda and DI
 
 ```js
