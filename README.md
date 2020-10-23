@@ -24,6 +24,15 @@ export const main = jsonapi({
 ## Why choose BeeDI
 
 ## Table of Contents
+  * [Simple Example](#simple-example)
+  * [Why choose BeeDI](#why-choose-beedi)
+  * [Table of Contents](#table-of-contents)
+  * [Installation](#installation)
+  * [Requirements](#requirements)
+  * [Options](#options)
+  * [Testing](#testing)
+  * [Contributions](#contributions)
+
 
 ## Installation
 
