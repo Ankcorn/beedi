@@ -1,9 +1,11 @@
-import { test } from 'uvu';
+import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import { jsonapi } from '../index';
 import event from './seed/event.json'
 
-test('beedi calls my handler and parses json response', async () => {
+const JSONAPI_TEST = suite('JSONAPI');
+
+JSONAPI_TEST('beedi calls my handler and parses json response', async () => {
 	const handler = async() => {
 		return { 
 			message: 'ok'
@@ -21,7 +23,7 @@ test('beedi calls my handler and parses json response', async () => {
 	})
 })
 
-test('beedi calls my handler and parses string response', async () => {
+JSONAPI_TEST('beedi calls my handler and parses string response', async () => {
 	const handler = async() => {
 		return 'ok'
 	}
@@ -37,7 +39,7 @@ test('beedi calls my handler and parses string response', async () => {
 	})
 });
 
-test('beedi calls my handler and parses number response', async () => {
+JSONAPI_TEST('beedi calls my handler and parses number response', async () => {
 	const handler = async() => {
 		return 4
 	}
@@ -53,7 +55,7 @@ test('beedi calls my handler and parses number response', async () => {
 	})
 });
 
-test('beedi supports cors', async () => {
+JSONAPI_TEST('beedi supports cors', async () => {
 	const handler = async () => {
 		return {
 			message: 'hello cors'
@@ -78,7 +80,7 @@ test('beedi supports cors', async () => {
 
 
 
-test('beedi parses body to object to make life slightly more convenient', async () => {
+JSONAPI_TEST('beedi parses body to object to make life slightly more convenient', async () => {
 	const handler = async (event) => {
 		return event.body.message
 	}
@@ -95,7 +97,7 @@ test('beedi parses body to object to make life slightly more convenient', async 
 	})
 });
 
-test('beedi lets you inject dependencies to make testing easier', async () => {
+JSONAPI_TEST('beedi lets you inject dependencies to make testing easier', async () => {
 	const handler = async (event, { dep1, dep2 }) => {
 		return {
 			dep1: dep1(),
@@ -114,7 +116,7 @@ test('beedi lets you inject dependencies to make testing easier', async () => {
 	assert.equal(response.body, JSON.stringify({dep1:'dep1 was called',dep2:'dep2 was called'}));
 });
 
-test('beedi json api handles errors for you', async () => {
+JSONAPI_TEST('beedi json api handles errors for you', async () => {
 	const handler = async (event, { dep1, dep2 }) => {
 		throw Error('big bad error')
 	}
@@ -131,7 +133,7 @@ test('beedi json api handles errors for you', async () => {
 	})
 });
 
-test('beedi json api can catch and configure errors with regex', async () => {
+JSONAPI_TEST('beedi json api can catch and configure errors with regex', async () => {
 	const handler = async (event, { dep1, dep2 }) => {
 		throw Error('big bad error')
 	}
@@ -158,4 +160,4 @@ test('beedi json api can catch and configure errors with regex', async () => {
 	})
 });
 
-test.run();
+JSONAPI_TEST.run();

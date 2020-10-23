@@ -1,6 +1,6 @@
 {
   "name": "beedi",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Make Api's using aws lambda and DI",
   "main": "index.js",
   "scripts": {

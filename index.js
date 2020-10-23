@@ -9,7 +9,9 @@ function parseJSON(value) {
 export function jsonapi({ handler, cors, dependencies, errors }) {
 	return async (event, context) => {
 		try {
-			const resp = await handler({ ...event, body: parseJSON(event.body) }, { ...context, ...dependencies && dependencies(event) });
+			const input = { ...event, body: parseJSON(event.body) };
+			const deps =  { ...context, ...dependencies && dependencies(event) };
+			const resp = await handler(input, deps);
 
 			const headers = cors && {
 				'Access-Control-Allow-Origin': cors,
