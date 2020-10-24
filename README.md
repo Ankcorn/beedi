@@ -27,10 +27,10 @@ Its super early days. BeeDI is not used in production anywhere and is just a fun
 
 With that disclamer out the way beedi does have some upsides.
 
-* Its really lightweight.
+* It's really lightweight.
 * It has no external dependencies. 
 * The interface is really simple. Each helper takes an object that contains just a couple of parameters.
-* It doesn't have any legacy bagage. No support for callbacks. This means less work to maintain it and it is much lighter. This also could be considered a bad thing.
+* No legacy bagage. No support for callbacks. This means less work to maintain it and it is much lighter. This also could be considered a bad thing.
 * The internal code is very low abstraction and very simple. Take a peek under the hood. There really is very little magic to make this happen.
 
 If you give it a try let me know by leaving a star
