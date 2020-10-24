@@ -1,6 +1,6 @@
 # BeeDI / 🐝 DI
 
-BeeDI is a opinionated and lightweight library of helpers for building lambdas. It helps you build tidy and testable lambda functions.
+BeeDI is an opinionated and lightweight library of helpers for building lambdas. It helps you build tidy and testable lambda functions.
 It simplifies interfacing with aws event sources by limiting and preparsing the input. The aim is to support all the most common event sources.
 
 ## Simple Example
