@@ -1,7 +1,7 @@
 # BeeDI / 🐝 DI
 
-BeeDI is a opinionated and lightweight library for building lambdas to help you build tidy and testable lambda functions.
-
+BeeDI is a opinionated and lightweight library of helpers for building lambdas. It helps you build tidy and testable lambda functions.
+It simplifies interfacing with aws event sources by limiting and preparsing the input. The aim is to support all the most common event sources.
 
 ## Simple Example
 
@@ -22,6 +22,17 @@ export const main = jsonapi({
 ```
 
 ## Why choose BeeDI
+
+Its super early days. BeeDI is not used in production anywhere and is just a fun hobby project. I would not recomend using this in production. If you want something with a similar style but more feature complete, better tested, and well maintained check out https://middy.js.org/ and https://laconiajs.io/.
+
+With that disclamer out the way beedi does have some upsides.
+
+* Its really lightweight.
+* It has no external dependencies. 
+* The interface is really simple. Each helper takes an object that contains just a couple of parameters.
+* It doesn't have any legacy bagage. No support for callbacks. This means less work to maintain it and it is much lighter. This also could be considered a bad thing.
+* The internal code is very low abstraction and very simple. Take a peek under the hood. There really is very little magic to make this happen.
+
 
 ## Table of Contents
   * [Simple Example](#simple-example)
