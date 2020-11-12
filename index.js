@@ -34,6 +34,13 @@ export function jsonapi({ handler, cors, dependencies, errors }) {
 		} catch (e) {
 			if(errors) {
 				const key = Object.keys(errors).find(condition => RegExp(condition).test(e.message));
+				if(!key) {
+					return {
+						statusCode: 500,
+						...headers && { headers },
+						body: e.message
+					}
+				}
 				const resp = errors[key](e)
 				return {
 					...resp,

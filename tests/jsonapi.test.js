@@ -160,4 +160,27 @@ JSONAPI_TEST('beedi json api can catch and configure errors with regex', async (
 	})
 });
 
+JSONAPI_TEST('beedi json api throws error that does not match regex', async () => {
+	const handler = async (event, { dep1, dep2 }) => {
+		throw Error('blah')
+	}
+
+	const lambda = jsonapi({
+		handler,
+		errors: {
+			"big*": error => ({
+				body: { foo: error.message },
+				statusCode: 400,
+			})
+		}
+	});
+
+	const response = await lambda(event, {});
+
+	assert.equal(response, {
+		statusCode: 500,
+		body: 'blah',
+	})
+});
+
 JSONAPI_TEST.run();
