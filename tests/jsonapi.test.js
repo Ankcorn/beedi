@@ -129,7 +129,7 @@ JSONAPI_TEST('beedi json api handles errors for you', async () => {
 
 	assert.equal(response, {
 		statusCode: 500,
-		body: "{\"message\":\"Internal Server Error\"}",
+		body: 'big bad error',
 	})
 });
 

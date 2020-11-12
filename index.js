@@ -8,15 +8,15 @@ function parseJSON(value) {
 
 export function jsonapi({ handler, cors, dependencies, errors }) {
 	return async (event, context) => {
+		const headers = cors && {
+			'Access-Control-Allow-Origin': cors,
+			'Access-Control-Allow-Credentials': true,
+		};
+
 		try {
 			const input = { ...event, body: parseJSON(event.body) };
 			const deps =  { ...context, ...dependencies && dependencies(event) };
 			const resp = await handler(input, deps);
-
-			const headers = cors && {
-				'Access-Control-Allow-Origin': cors,
-				'Access-Control-Allow-Credentials': true,
-			};
 			
 			if(typeof resp === 'string' || typeof resp === 'number') {
 				return {
@@ -37,12 +37,14 @@ export function jsonapi({ handler, cors, dependencies, errors }) {
 				const resp = errors[key](e)
 				return {
 					...resp,
+					...headers && { headers },
 					body: JSON.stringify(resp.body)
 				}
 			}
 			return {
 				statusCode: 500,
-				body: JSON.stringify({ message: 'Internal Server Error' })
+				...headers && { headers },
+				body: e.message
 			}
 		}
 		
