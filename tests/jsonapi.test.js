@@ -6,14 +6,12 @@ import event from './seed/event.json'
 const JSONAPI_TEST = suite('JSONAPI');
 
 JSONAPI_TEST('beedi calls my handler and parses json response', async () => {
-	const handler = async() => {
+	const app = async() => {
 		return { 
 			message: 'ok'
 		}
 	}
-	const lambda = jsonapi({
-		handler
-	});
+	const lambda = jsonapi(app);
 
 	const response = await lambda(event);
 
@@ -24,12 +22,10 @@ JSONAPI_TEST('beedi calls my handler and parses json response', async () => {
 })
 
 JSONAPI_TEST('beedi calls my handler and parses string response', async () => {
-	const handler = async() => {
+	const app = async() => {
 		return 'ok'
 	}
-	const lambda = jsonapi({
-		handler
-	});
+	const lambda = jsonapi(app);
 
 	const response = await lambda(event);
 
@@ -40,12 +36,10 @@ JSONAPI_TEST('beedi calls my handler and parses string response', async () => {
 });
 
 JSONAPI_TEST('beedi calls my handler and parses number response', async () => {
-	const handler = async() => {
+	const app = async() => {
 		return 4
 	}
-	const lambda = jsonapi({
-		handler
-	});
+	const lambda = jsonapi(app);
 
 	const response = await lambda(event);
 
@@ -56,13 +50,12 @@ JSONAPI_TEST('beedi calls my handler and parses number response', async () => {
 });
 
 JSONAPI_TEST('beedi supports cors', async () => {
-	const handler = async () => {
+	const app = async () => {
 		return {
 			message: 'hello cors'
 		}
 	}
-	const lambda = jsonapi({
-		handler,
+	const lambda = jsonapi(app, {
 		cors: '*'
 	});
 
@@ -81,13 +74,11 @@ JSONAPI_TEST('beedi supports cors', async () => {
 
 
 JSONAPI_TEST('beedi parses body to object to make life slightly more convenient', async () => {
-	const handler = async (event) => {
+	const app = async (event) => {
 		return event.body.message
 	}
 
-	const lambda = jsonapi({
-		handler,
-	});
+	const lambda = jsonapi(app);
 
 	const response = await lambda(event);
 
@@ -98,15 +89,14 @@ JSONAPI_TEST('beedi parses body to object to make life slightly more convenient'
 });
 
 JSONAPI_TEST('beedi lets you inject dependencies to make testing easier', async () => {
-	const handler = async (event, { dep1, dep2 }) => {
+	const app = async (event, { dep1, dep2 }) => {
 		return {
 			dep1: dep1(),
 			dep2: dep2(),
 		}
 	}
 
-	const lambda = jsonapi({
-		handler,
+	const lambda = jsonapi(app, {
 		dependencies: () => ({ dep1: () => 'dep1 was called', dep2: () => 'dep2 was called' })
 	});
 
@@ -117,13 +107,11 @@ JSONAPI_TEST('beedi lets you inject dependencies to make testing easier', async 
 });
 
 JSONAPI_TEST('beedi json api handles errors for you', async () => {
-	const handler = async (event, { dep1, dep2 }) => {
+	const app = async (event, { dep1, dep2 }) => {
 		throw Error('big bad error')
 	}
 
-	const lambda = jsonapi({
-		handler,
-	});
+	const lambda = jsonapi(app);
 
 	const response = await lambda(event, {});
 
@@ -134,12 +122,11 @@ JSONAPI_TEST('beedi json api handles errors for you', async () => {
 });
 
 JSONAPI_TEST('beedi json api can catch and configure errors with regex', async () => {
-	const handler = async (event, { dep1, dep2 }) => {
+	const app = async (event, { dep1, dep2 }) => {
 		throw Error('big bad error')
 	}
 
-	const lambda = jsonapi({
-		handler,
+	const lambda = jsonapi(app, {
 		errors: {
 			"big*": error => ({
 				body: { foo: error.message },
@@ -161,12 +148,11 @@ JSONAPI_TEST('beedi json api can catch and configure errors with regex', async (
 });
 
 JSONAPI_TEST('beedi json api throws error that does not match regex', async () => {
-	const handler = async (event, { dep1, dep2 }) => {
+	const app = async (event, { dep1, dep2 }) => {
 		throw Error('blah')
 	}
 
-	const lambda = jsonapi({
-		handler,
+	const lambda = jsonapi(app, {
 		errors: {
 			"big*": error => ({
 				body: { foo: error.message },

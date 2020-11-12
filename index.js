@@ -6,8 +6,9 @@ function parseJSON(value) {
 	}
 }
 
-export function jsonapi({ handler, cors, dependencies, errors }) {
+export function jsonapi(app, { cors, dependencies, errors } = {}) {
 	return async (event, context) => {
+
 		const headers = cors && {
 			'Access-Control-Allow-Origin': cors,
 			'Access-Control-Allow-Credentials': true,
@@ -16,7 +17,7 @@ export function jsonapi({ handler, cors, dependencies, errors }) {
 		try {
 			const input = { ...event, body: parseJSON(event.body) };
 			const deps =  { ...context, ...dependencies && dependencies(event) };
-			const resp = await handler(input, deps);
+			const resp = await app(input, deps);
 			
 			if(typeof resp === 'string' || typeof resp === 'number') {
 				return {
