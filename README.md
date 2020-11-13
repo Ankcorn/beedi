@@ -8,7 +8,7 @@ It simplifies interfacing with aws event sources by limiting and preparsing the 
 ```js
 import { jsonapi } from 'beedi';
 
-async function main(event) {
+async function app(event) {
   // The handler just contains the logic.
   // event.body has been json parsed.
   return {
@@ -16,7 +16,7 @@ async function main(event) {
   }
 }
 
-export const handler = jsonapi(main);
+export const handler = jsonapi(app);
 ```
 
 ## Why choose BeeDI
@@ -38,16 +38,13 @@ If you give it a try let me know by leaving a star
   * [Why choose BeeDI](#why-choose-beedi)
   * [Table of Contents](#table-of-contents)
   * [Installation](#installation)
-  * [Requirements](#requirements)
-  * [Options](#options)
+  * [Examples](#examples)
   * [Testing](#testing)
   * [Contributions](#contributions)
 
 ## Installation
 
-## Requirements
-
-## Options
+## Examples
 
 ## Testing
 
