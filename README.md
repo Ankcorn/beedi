@@ -46,6 +46,26 @@ If you give it a try let me know by leaving a star
 
 ## Examples
 
+### Dependency Injection
+
+```js
+import { jsonapi } from 'beedi';
+import { pg } from 'pg-sql';
+
+export async function app(event, { pg }) {
+  // The handler just contains the logic.
+  // event.body has been json parsed.
+  await pg.sql('INSERT blah...');
+  return {
+    message: 'I get json stringified'
+  }
+}
+
+export const handler = jsonapi(app, { dependencies: () => ({ pg }));
+```
+
+
+
 ## Testing
 
 ## Contributions
